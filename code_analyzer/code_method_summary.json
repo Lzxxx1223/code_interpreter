@@ -1,0 +1,760 @@
+[
+    {
+        "javaType": "class",
+        "package": "com.example.demo",
+        "class": "DemoApplication",
+        "implement": [],
+        "extent": {
+            "extentPackage": "org.springframework.boot",
+            "extentClass": "SpringApplication"
+        },
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "DemoApplication",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "String[]",
+                        "constructorParameterName": "args"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [],
+        "methods": [
+            {
+                "methodName": "main",
+                "returnType": "void",
+                "parameters": [
+                    {
+                        "name": "args",
+                        "type": "String[]"
+                    }
+                ],
+                "invoke": [
+                    {
+                        "invokePackageName": "org.springframework.boot",
+                        "invokeClassName": "SpringApplication",
+                        "invokeMethodName": "run",
+                        "parameters": [
+                            {
+                                "value": "DemoApplication.class",
+                                "type": "Class"
+                            },
+                            {
+                                "value": "args",
+                                "type": "String[]"
+                            }
+                        ]
+                    }
+                ],
+                "explanations": "The main method is the entry point of the Java application. It calls the SpringApplication.run method to start the Spring Boot application. The run method takes the DemoApplication class and command line arguments as parameters."
+            }
+        ]
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.entity",
+        "class": "Identifier",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "Identifier",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "Concept",
+                        "constructorParameterName": "concept"
+                    },
+                    {
+                        "constructorParameterType": "Map<Attribute, String>",
+                        "constructorParameterName": "attributeValue"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "concept",
+                "memberVariableType": "Concept",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "attributeValue",
+                "memberVariableType": "Map<Attribute, String>",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": []
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.entity",
+        "class": "Response",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "Response",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "Integer",
+                        "constructorParameterName": "productId"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "productId",
+                "memberVariableType": "Integer",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": []
+    },
+    {
+        "javaType": "enum",
+        "package": "com.example.demo.entity",
+        "class": "EnumType",
+        "constants": [
+            {
+                "constantsName": "PRODUCT",
+                "constantsParameters": [
+                    {
+                        "constantsParameterName": "tableName",
+                        "constantsParameterValue": "product.dc"
+                    },
+                    {
+                        "constantsParameterName": "fieldName",
+                        "constantsParameterValue": "pin"
+                    }
+                ]
+            },
+            {
+                "constantsName": "VENDOR",
+                "constantsParameters": [
+                    {
+                        "constantsParameterName": "tableName",
+                        "constantsParameterValue": "vendor.dc"
+                    },
+                    {
+                        "constantsParameterName": "fieldName",
+                        "constantsParameterValue": "vin"
+                    }
+                ]
+            }
+        ],
+        "constructors": [
+            {
+                "constructorName": "EnumType",
+                "constructorParameterType": "String",
+                "constructorParameterName": "tableName"
+            },
+            {
+                "constructorName": "EnumType",
+                "constructorParameterType": "String",
+                "constructorParameterName": "fieldName"
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "tableName",
+                "memberVariableType": "String",
+                "memberVariableValue": "null"
+            },
+            {
+                "memberVariableName": "fieldName",
+                "memberVariableType": "String",
+                "memberVariableValue": "null"
+            }
+        ]
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.entity",
+        "class": "Attribute",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "Attribute",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "Integer",
+                        "constructorParameterName": "dcaId"
+                    },
+                    {
+                        "constructorParameterType": "String",
+                        "constructorParameterName": "fieldName"
+                    },
+                    {
+                        "constructorParameterType": "String",
+                        "constructorParameterName": "name"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "dcaId",
+                "memberVariableType": "Integer",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "fieldName",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "name",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": []
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.entity",
+        "class": "Concept",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "Concept",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "EnumType",
+                        "constructorParameterName": "enumType"
+                    },
+                    {
+                        "constructorParameterType": "String",
+                        "constructorParameterName": "name"
+                    },
+                    {
+                        "constructorParameterType": "List<Attribute>",
+                        "constructorParameterName": "columns"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "enumType",
+                "memberVariableType": "EnumType",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "name",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "columns",
+                "memberVariableType": "List<Attribute>",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": []
+    },
+    {
+        "javaType": "interface",
+        "package": "com.example.demo.dao",
+        "class": "SQLProcess",
+        "methods": [
+            {
+                "methodName": "insert",
+                "returnType": "void",
+                "parameters": [
+                    {
+                        "name": "sql",
+                        "type": "String"
+                    }
+                ],
+                "explanations": "This method is used to insert data into the database. It takes a SQL query as a parameter and executes it.",
+                "invoke": []
+            },
+            {
+                "methodName": "select",
+                "returnType": "List<Map<String, Object>>",
+                "parameters": [
+                    {
+                        "name": "sql",
+                        "type": "String"
+                    }
+                ],
+                "explanations": "This method is used to select data from the database. It takes a SQL query as a parameter and returns a list of maps containing the query results.",
+                "invoke": []
+            },
+            {
+                "methodName": "selectDCByDCTable",
+                "returnType": "DC",
+                "parameters": [
+                    {
+                        "name": "table",
+                        "type": "String"
+                    }
+                ],
+                "explanations": "This method is used to select a DC object by the table name. It takes the table name as a parameter and returns the corresponding DC object.",
+                "invoke": []
+            },
+            {
+                "methodName": "selectDCAByDCId",
+                "returnType": "List<DCA>",
+                "parameters": [
+                    {
+                        "name": "dcId",
+                        "type": "Integer"
+                    }
+                ],
+                "explanations": "This method is used to select a list of DCA objects by the DC ID. It takes the DC ID as a parameter and returns a list of DCA objects associated with that DC ID.",
+                "invoke": []
+            },
+            {
+                "methodName": "selectMapping",
+                "returnType": "List<Mapping>",
+                "parameters": [],
+                "explanations": "This method is used to select a list of Mapping objects. It does not take any parameters and returns a list of Mapping objects.",
+                "invoke": []
+            },
+            {
+                "methodName": "findMaxPin",
+                "returnType": "Integer",
+                "parameters": [],
+                "explanations": "This method is used to find the maximum pin value. It does not take any parameters and returns the maximum pin value.",
+                "invoke": []
+            }
+        ]
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.controller",
+        "class": "ProcessController",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [],
+        "memberVariables": [
+            {
+                "memberVariableName": "process",
+                "memberVariableType": "Process",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": [
+            {
+                "methodName": "processVin",
+                "returnType": "Response",
+                "parameters": [],
+                "invoke": [
+                    {
+                        "invokePackageName": "com.example.demo.service",
+                        "invokeClassName": "Process",
+                        "invokeMethodName": "link",
+                        "parameters": []
+                    }
+                ],
+                "explanations": "This method is annotated with @GetMapping, which means it will handle GET requests to the root URL. It calls the 'link' method of the 'process' object, which is an instance of the 'Process' class injected via @Autowired."
+            }
+        ]
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.model",
+        "class": "DCA",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "DCA",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "Integer",
+                        "constructorParameterName": "dcaId"
+                    },
+                    {
+                        "constructorParameterType": "Integer",
+                        "constructorParameterName": "dcId"
+                    },
+                    {
+                        "constructorParameterType": "String",
+                        "constructorParameterName": "field"
+                    },
+                    {
+                        "constructorParameterType": "String",
+                        "constructorParameterName": "name"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "dcaId",
+                "memberVariableType": "Integer",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "dcId",
+                "memberVariableType": "Integer",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "field",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "name",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": []
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.model",
+        "class": "Mapping",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "Mapping",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "Integer",
+                        "constructorParameterName": "vinDCAId"
+                    },
+                    {
+                        "constructorParameterType": "Integer",
+                        "constructorParameterName": "pinDCAId"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "vinDCAId",
+                "memberVariableType": "Integer",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "pinDCAId",
+                "memberVariableType": "Integer",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": []
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.model",
+        "class": "DC",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [
+            {
+                "constructorName": "DC",
+                "constructorParameters": [
+                    {
+                        "constructorParameterType": "Integer",
+                        "constructorParameterName": "dcId"
+                    },
+                    {
+                        "constructorParameterType": "String",
+                        "constructorParameterName": "table"
+                    },
+                    {
+                        "constructorParameterType": "String",
+                        "constructorParameterName": "name"
+                    }
+                ]
+            }
+        ],
+        "memberVariables": [
+            {
+                "memberVariableName": "dcId",
+                "memberVariableType": "Integer",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "table",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            },
+            {
+                "memberVariableName": "name",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": []
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.service",
+        "class": "VendorWrite",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [],
+        "memberVariables": [
+            {
+                "memberVariableName": "sqlProcess",
+                "memberVariableType": "SQLProcess",
+                "memberVariableValue": "Autowired SQLProcess object"
+            }
+        ],
+        "methods": [
+            {
+                "methodName": "getSt",
+                "returnType": "Identifier",
+                "parameters": [
+                    {
+                        "name": "concept",
+                        "type": "Concept"
+                    },
+                    {
+                        "name": "vin",
+                        "type": "Integer"
+                    }
+                ],
+                "invoke": [
+                    {
+                        "invokePackageName": "com.example.demo.dao",
+                        "invokeClassName": "SQLProcess",
+                        "invokeMethodName": "select",
+                        "parameters": [
+                            {
+                                "value": "sql",
+                                "type": "String"
+                            }
+                        ]
+                    }
+                ],
+                "explanations": [
+                    "Create a new Identifier object",
+                    "Create a new HashMap to store Attribute and String values",
+                    "Build the SQL query using the concept's enumType's table name and vin parameter",
+                    "Retrieve the result of the SQL query using the sqlProcess object",
+                    "Iterate over the columns of the concept and put the field name and value into the map",
+                    "Set the attribute value of the identifier using the map",
+                    "Return the identifier object"
+                ]
+            }
+        ]
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.service",
+        "class": "Process",
+        "implement": [],
+        "extent": {},
+        "constants": [
+            {
+                "constantsName": "vin",
+                "constantsParameters": [
+                    {
+                        "constantsParameterName": "vin",
+                        "constantsParameterValue": 1
+                    }
+                ]
+            }
+        ],
+        "constructors": [],
+        "memberVariables": [],
+        "methods": [
+            {
+                "methodName": "link",
+                "returnType": "Response",
+                "parameters": [],
+                "invoke": [
+                    {
+                        "invokePackageName": "com.example.demo.dao",
+                        "invokeClassName": "SQLProcess",
+                        "invokeMethodName": "findMaxPin",
+                        "parameters": []
+                    },
+                    {
+                        "invokePackageName": "com.example.demo.service",
+                        "invokeClassName": "InitService",
+                        "invokeMethodName": "getConceptSchema",
+                        "parameters": []
+                    },
+                    {
+                        "invokePackageName": "com.example.demo.service",
+                        "invokeClassName": "VendorWrite",
+                        "invokeMethodName": "getSt",
+                        "parameters": []
+                    },
+                    {
+                        "invokePackageName": "com.example.demo.service",
+                        "invokeClassName": "InitService",
+                        "invokeMethodName": "getMappings",
+                        "parameters": []
+                    },
+                    {
+                        "invokePackageName": "com.example.demo.service",
+                        "invokeClassName": "ProductWrite",
+                        "invokeMethodName": "getInsertStr",
+                        "parameters": []
+                    }
+                ],
+                "explanations": "The link method is the main method of the Process class. It retrieves the max pin value from the SQLProcess class, gets the vendor concept schema from the InitService class, gets the product concept schema from the InitService class, retrieves the vendor identifier using the VendorWrite class, retrieves the mappings using the InitService class, creates a mapping between vendor and product attributes, creates a product identifier, replaces placeholders in the insert statement with actual values, and inserts the data into the database."
+            }
+        ]
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.service",
+        "class": "InitService",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [],
+        "memberVariables": [
+            {
+                "memberVariableName": "conceptSchema",
+                "memberVariableType": "Map<EnumType, Concept>",
+                "memberVariableValue": "new HashMap<>()"
+            },
+            {
+                "memberVariableName": "mappings",
+                "memberVariableType": "List<Mapping>",
+                "memberVariableValue": "null"
+            },
+            {
+                "memberVariableName": "sqlProcess",
+                "memberVariableType": "SQLProcess",
+                "memberVariableValue": "null"
+            },
+            {
+                "memberVariableName": "productWrite",
+                "memberVariableType": "ProductWrite",
+                "memberVariableValue": "null"
+            }
+        ],
+        "methods": [
+            {
+                "methodName": "init",
+                "returnType": "void",
+                "parameters": [],
+                "invoke": [
+                    {
+                        "invokePackageName": "com.example.demo.dao",
+                        "invokeClassName": "SQLProcess",
+                        "invokeMethodName": "selectMapping",
+                        "parameters": []
+                    },
+                    {
+                        "invokePackageName": "this",
+                        "invokeClassName": "InitService",
+                        "invokeMethodName": "loadSchema",
+                        "parameters": [
+                            {
+                                "value": "EnumType.VENDOR",
+                                "type": "EnumType"
+                            }
+                        ]
+                    },
+                    {
+                        "invokePackageName": "this",
+                        "invokeClassName": "InitService",
+                        "invokeMethodName": "loadSchema",
+                        "parameters": [
+                            {
+                                "value": "EnumType.PRODUCT",
+                                "type": "EnumType"
+                            }
+                        ]
+                    }
+                ],
+                "explanations": "This method initializes the mappings by calling the selectMapping method from the SQLProcess class. It then loads the schema for EnumType.VENDOR and EnumType.PRODUCT by calling the loadSchema method."
+            },
+            {
+                "methodName": "loadSchema",
+                "returnType": "void",
+                "parameters": [
+                    {
+                        "name": "enumType",
+                        "type": "EnumType"
+                    }
+                ],
+                "invoke": [
+                    {
+                        "invokePackageName": "com.example.demo.dao",
+                        "invokeClassName": "SQLProcess",
+                        "invokeMethodName": "selectDCByDCTable",
+                        "parameters": [
+                            {
+                                "value": "enumType.getTableName()",
+                                "type": "String"
+                            }
+                        ]
+                    },
+                    {
+                        "invokePackageName": "com.example.demo.dao",
+                        "invokeClassName": "SQLProcess",
+                        "invokeMethodName": "selectDCAByDCId",
+                        "parameters": [
+                            {
+                                "value": "dc.getDcId()",
+                                "type": "int"
+                            }
+                        ]
+                    },
+                    {
+                        "invokePackageName": "com.example.demo.service",
+                        "invokeClassName": "ProductWrite",
+                        "invokeMethodName": "insertSt",
+                        "parameters": [
+                            {
+                                "value": "concept",
+                                "type": "Concept"
+                            }
+                        ]
+                    }
+                ],
+                "explanations": "This method loads the schema for a given EnumType. It first creates a new Concept object and sets its properties based on the data retrieved from the database. It then inserts the concept into the conceptSchema map. If the EnumType is PRODUCT, it also inserts the concept using the productWrite class."
+            }
+        ]
+    },
+    {
+        "javaType": "class",
+        "package": "com.example.demo.service",
+        "class": "ProductWrite",
+        "implement": [],
+        "extent": {},
+        "constants": [],
+        "constructors": [],
+        "memberVariables": [
+            {
+                "memberVariableName": "insertStr",
+                "memberVariableType": "String",
+                "memberVariableValue": null
+            }
+        ],
+        "methods": [
+            {
+                "methodName": "insertSt",
+                "returnType": "void",
+                "parameters": [
+                    {
+                        "name": "concept",
+                        "type": "Concept"
+                    }
+                ],
+                "invoke": [],
+                "explanations": "This method takes a Concept object as a parameter. It creates a StringBuilder object to dynamically build an SQL insert statement. It iterates over the columns of the Concept object and appends them to the SQL statement. Finally, it sets the insertStr member variable to the generated SQL statement."
+            }
+        ]
+    }
+]
