@@ -19,8 +19,8 @@ class LLMInit:
     llm: ChatOpenAI
 
     def __init__(self,
-                 open_ai_key='<OPENAI_API_KEY>',
-                 open_ai_base='https://apic.ohmygpt.com/v1',
+                 open_ai_key='sk-hoZTk62z0b57ff585b04T3BlbKFJF9Ad5F81CC3d41f1BA4c',
+                 open_ai_base='https://api.ohmygpt.com/v1',
                  model='gpt-3.5-turbo'):
         os.environ['OPENAI_API_KEY'] = open_ai_key
         self.llm = ChatOpenAI(openai_api_base=open_ai_base, model=model, temperature=0, max_tokens=4096)

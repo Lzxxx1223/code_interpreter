@@ -18,44 +18,28 @@ class CodeAnalyzer:
 
     code_path: str
     prompt = """
-            You are a very patience Java export and provide following Java source code: {text}
+            Analyze the following Java code snippet and extract the relevant information:
             
-            Analyst each method in the Java code, create a JSON object with following keys:
-            - `javaType`: <value should be one fo the class, interface, abstract and enum>
-            - `package`: <The name of the Java package>
-            - `class`: <The name of the Java class>
-            - `implement`: <list implements of the Java class>  
-                - `implementName`: <The name of the implement>
-            - `extent`: <The extends of the Java class> : 
-                - `extentPackage`: <The package name of the extent class>
-                - `extentClass`: <The class name of the extent class>
-            - `constants`: <List of constant value>
-                - `constantsName`: <The name of the constant>
-                - `constantsParameters` : <The parameters of the constant>
-                    - `constantsParameterName`: <The name of the constant parameter>
-                    - `constantsParameterValue`: <The value of the constant parameter>
-            - `constructors`: <List constructor of Java class> 
-                - `constructorName`: <The name of the constructor parameter>
-                    - `constructorParameterType`: <The data type of the constructor parameter>
-                    - `constructorParameterName`: <The name of the constructor parameter>
-            - `memberVariables`: <List member variable of Java class> 
-                - `memberVariableName`: <The name of the member variable>
-                - `memberVariableType`: <The data type of the member variable>
-                - `memberVariableValue`: <he value of the member variable>
-            - `methods`: <List methods of the Java class> 
-                - `methodName`: <The name of the method>
-                - `returnType`: <The return type of the method>
-                - `parameters`: <The parameters of the method>
-                    - `name`: <The name of the parameter>
-                    - `type`: <The data type of the parameter>
-                - `invoke`: <List the method only be invoked in the current method>
-                    - `invokePackageName`: <The package name of the invoked method>
-                    - `invokeClassName`: <The class name of the invoked method>
-                    - `invokeMethodName`: <The method name of the invoked method>
-                    - `parameters`: <The parameters of the invoked method>
-                        - `value`: <The value of the parameter>
-                        - `type`: <The data type of the parameter>
-                - `explanations`: <Explain of the single Java method line by line, explain in as much detail as possible, including the methods and raw parameters used in each line>
+            ```java
+            {text}
+            ```
+            
+            Extract the following information from the code:
+            
+            1. Class name
+            2. Class attributes (name, type, modifiers)
+            3. Method names and signatures (name, return type, parameters, modifiers)
+            4. Method parameters (name, type)
+            5. Method return types
+            6. Method invocations (invoked method names and their corresponding class names)
+            7. SQL queries or ORM interactions (query strings, accessed attributes or columns)
+            8. Conditional statements and loops (if-else, switch-case, for, while)
+            9. Exception handling (try-catch blocks, caught exceptions)
+            10. Annotations and configuration (relevant annotations, configuration files or classes)
+            11. Comments and TODO notes
+            12. Variable names and usage (related to attribute changes or database interactions)
+            
+            Provide the extracted information in a structured format, such as JSON or a well-formatted list.
             """
 
     def __init__(self, code_path):
@@ -90,4 +74,5 @@ class CodeAnalyzer:
         write_response_to_file(result)
 
 
-# code_analyzer = CodeAnalyzer('/Users/liuzhongxu/Documents/Learning/demo 2/src/main/java')
+code_analyzer = CodeAnalyzer('/Users/liuzhongxu/Documents/Learning/demo 2/src/main/java')
+code_analyzer.run()
