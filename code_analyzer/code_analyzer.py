@@ -29,7 +29,7 @@ class CodeAnalyzer:
             1. Class name
             2. Class attributes (name, type, modifiers)
             3. Method names and signatures (name, return type, parameters, modifiers)
-            4. Method parameters (name, type)
+            4. Method parameters (name, type, return types)
             5. Method return types
             6. Method invocations (invoked method names and their corresponding class names)
             7. SQL queries or ORM interactions (query strings, accessed attributes or columns)
