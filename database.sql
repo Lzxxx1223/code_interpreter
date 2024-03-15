@@ -46,5 +46,3 @@ CREATE TABLE product.dc (
     dca1 VARCHAR(40) NOT NULL COMMENT 'column name is pin attribute physical name, value is pin attribute value',
     dca2 VARCHAR(40) NOT NULL COMMENT 'column name is pin attribute physical name, value is pin attribute value'
 );
-
-INSERT INTO product.dc(pin, dca1, dca2) VALUES (1, 'vendor_dca1_value', 'vendor_dca2_value');
