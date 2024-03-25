@@ -14,6 +14,33 @@ class MetaExtractor:
     weaviate_client = WeaviateClient()
     mongo_client = MongoDB()
 
+    class_prompt = """
+        You are Java code interpreter tool, your job is analyst provided Java source code and generate the detail Java class description.
+        
+        Please format the extracted information as a JSON object with the following structure:
+        - `package` : <package name>
+        - `class` : <class name>
+        - `description` : <detail explanation of the Java class, return as the string>
+        
+        Source class:
+        {code}
+        
+        """
+
+    method_prompt = """
+        You are Java code interpreter tool, your job is analyst provided Java source code and generate the detail Java methods line by line.
+
+        Please format the extracted information as a List JSON object with the following structure:
+        - `package` : <package name>
+        - `class` : <class name>
+        - `method` : <method name>
+        - `description`: <Explain the Java method step by step, return as the string>
+
+        Source class:
+        {code}
+
+    """
+
     meta_prompt = """
             You are a very patience Java export and provide following Java source code: {code}
 
@@ -55,12 +82,29 @@ class MetaExtractor:
                     - `parameters`: <The parameters of the invoked method>
                         - `value`: <The value of the parameter, default is empty string>
                         - `type`: <The data type of the parameter>
-                - `explanations`: <Explain of the single Java method line by line, explain in as much detail as possible, 
-                including the methods and raw parameters used in each line, return as String>
-            - `explanations`: <Detail explanation of the single Java class>
             """
 
-    def analyzer(self, code):
+    def class_analyst(self, code):
+        prompt_template = PromptTemplate.from_template(self.class_prompt)
+        llm_chain = LLMChain(llm=LLMInit().llm, prompt=prompt_template)
+        response = llm_chain.run(code=[code]).replace("```json", '').replace("```", '')
+        class_response = json.loads(response)
+        class_vector = OpenAIEmbeddings().embed_query(json.dumps(class_response['description']))
+        self.weaviate_client.create_object(Config.WEAVIATE_CLASS_COLLECTION, class_response, class_vector)
+
+    def method_analyst(self, code):
+        prompt_template = PromptTemplate.from_template(self.method_prompt)
+        llm_chain = LLMChain(llm=LLMInit().llm, prompt=prompt_template)
+        response = llm_chain.run(code=[code]).replace("```json", '').replace("```", '')
+        method_response = json.loads(response)
+        for item in method_response:
+            method_vector = OpenAIEmbeddings().embed_query(json.dumps(item['description']))
+            self.weaviate_client.create_object(Config.WEAVIATE_METHOD_COLLECTION, item, method_vector)
+
+    def meta_analyst(self, code):
+        self.class_analyst(code)
+        self.method_analyst(code)
+
         meta_prompt_template = PromptTemplate.from_template(self.meta_prompt)
         llm_chain = LLMChain(llm=LLMInit().llm, prompt=meta_prompt_template)
         response = llm_chain.run(code=[code]).replace("```json", '').replace("```", '')
@@ -70,18 +114,6 @@ class MetaExtractor:
         class_info.pop('methods')
         self.mongo_client.insert_code_class(class_info)
 
-        class_key = dict()
-        class_key['package'] = class_response['package']
-        class_key['class'] = class_response['class']
-        class_key['method'] = ''
-        class_vec = dict()
-        class_vec['explanations'] = class_response['explanations']
-        class_vec['comments'] = class_response['comments']
-        class_vec['enumInstance'] = class_response['enumInstance']
-        class_vec['variables'] = class_response['variables']
-        class_vector = OpenAIEmbeddings().embed_query(json.dumps(class_vec))
-        self.weaviate_client.create_object(Config.WEAVIATE_CLASS_COLLECTION, class_key, class_vector)
-
         if 'methods' in class_response.keys() and len(class_response['methods']) > 0:
             for method in class_response['methods']:
                 method_info = dict()
@@ -90,15 +122,10 @@ class MetaExtractor:
                 method_info.update(method)
                 self.mongo_client.insert_code_method(method_info)
 
-                method_key = dict()
-                method_key['package'] = method_info['package']
-                method_key['class'] = method_info['class']
-                method_key['method'] = method_info['name']
-                method_vec = dict()
-                method_vec['explanations'] = method_info['explanations']
-                method_vec['parameters'] = method_info['parameters']
-                method_vector = OpenAIEmbeddings().embed_query(json.dumps(method_vec))
-                self.weaviate_client.create_object(Config.WEAVIATE_METHOD_COLLECTION, method_key, method_vector)
+    def analyzer(self, code):
+        self.class_analyst(code)
+        self.method_analyst(code)
+        self.meta_analyst(code)
 
 
 

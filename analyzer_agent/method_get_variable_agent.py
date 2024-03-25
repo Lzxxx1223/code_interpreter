@@ -13,7 +13,8 @@ class MethodGetVariableAgent:
                 Please format the extracted information as a JSON object with the following structure:
                 - `package` : <the package name>
                 - `class`: <the class name>
-
+                - `variable` <the variable name>
+                
                 Class:
                 {class_information}
 

@@ -37,3 +37,6 @@ class CodeExtractor:
             else:
                 orm_analyzer.analyzer('', doc)
         invoked_extractor.analyzer()
+
+
+# CodeExtractor().analyzer()
