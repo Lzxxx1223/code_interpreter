@@ -1,11 +1,8 @@
-from typing import Sequence
-
-from langchain.memory import ConversationBufferMemory
-from langchain_core.prompts import MessagesPlaceholder
+from langchain.chains import SequentialChain
 from langchain_core.pydantic_v1 import Field
 from langchain_core.pydantic_v1 import BaseModel
 from langchain.tools import StructuredTool
-from langchain.agents import AgentType, AgentExecutor
+from langchain.agents import AgentType
 from langchain.agents import initialize_agent
 from llm_init.llm_init import LLMInit
 from db_analyzer.db_analyzer import DBAnalyzer
@@ -16,6 +13,8 @@ from analyzer_agent.method_change_variable_agent import MethodChangeVariableAgen
 from analyzer_agent.method_get_variable_agent import MethodGetVariableAgent
 from internal_database.mongo_client import MongoDB
 from internal_database.weaviate_client import WeaviateClient
+from langchain.chains.llm import LLMChain
+from langchain.prompts import PromptTemplate
 
 
 class ClassInforSchema(BaseModel):
@@ -31,9 +30,9 @@ class VariableSchema(ClassInforSchema):
     variable: str = Field(description="variable")
 
 
-class CodeTool:
+class CodeMeta:
 
-    agent_execute: AgentExecutor
+    overall_chain: SequentialChain
     db_analyzer = DBAnalyzer()
     orm_change_db = ORMChangeDB()
     meta_change_db = MetaChangeDB()
@@ -46,9 +45,9 @@ class CodeTool:
     prompt = """
         Your already have code-interpreter project code information, you can get information by only using tool
         Generate a comprehensive and detailed summary to answer the provided question:
-    
+
         question:
-        In code-interpreter project, {question}
+        In code-interpreter project, {input}
     """
 
     def __init__(self):
@@ -124,25 +123,16 @@ class CodeTool:
             )
         ]
 
-        agent_kwargs = {
-            "extra_prompt_message": [MessagesPlaceholder(variable_name='memory')],
-        }
-        memory = ConversationBufferMemory(memory_key="memory", return_message=True)
-
-        self.agent_execute = initialize_agent(tools, LLMInit().llm,
-                                              agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-                                              agent_kwargs=agent_kwargs,
-                                              memory=memory,
-                                              verbose=True)
-
-    def analyzer(self, question):
-        return self.agent_execute.run(self.prompt.replace('{question}', question))
+        agent_execute = initialize_agent(tools, LLMInit().llm,
+                                         agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+                                         verbose=True)
+        prompt_template = PromptTemplate.from_template("""
+            Explain the result
+        """)
+        llm_chain = LLMChain(llm=LLMInit().llm, prompt=prompt_template, output_key='text')
+        self.overall_chain = SequentialChain(chains=[agent_execute, llm_chain], input_variables=['input'], verbose=True)
 
 
-while True:
-    user_input = input()
-    print(CodeTool().analyzer(user_input))
-# print(CodeTool().analyzer('what is the `product` table structure in database?'))
 # print(CodeTool().analyzer('What is the explanation of the "link" method under "Process" class and "com.example.demo.service" package?'))
 # print(CodeTool().analyzer('How does the methods and classes insert values into `product.dc` database table.'))
 
